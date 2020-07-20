@@ -1,14 +1,20 @@
+import os
 import time
 import threading
+from dotenv import load_dotenv
 from azure.iot.device import Message
 
 from generator import Humidity, Temperature
 import listener
 
+# Get variables from dotenv
+load_dotenv()
+DEVICE_ID = os.getenv("DEVICE_ID")
+
 # Define the default value
 LIMIT_GROWING_DAYS = 40			# The maximum number of days before harvesting
 LIMIT_GROWING_REWARD = 40.0 	# The maximum number of rewarding scores before harvesting
-MESSAGE = '{{ "plant_id": {plant_id}, "temperature": {temperature}, "humidity": {humidity}, "growth_state": "{state}", "reward": {reward} }}'
+MESSAGE = '{{ "deviceId": "{deviceId}", "plant_id": {plant_id}, "temperature": {temperature}, "humidity": {humidity}, "growth_state": "{state}", "reward": {reward} }}'
 
 GROWTH_STATE = {
 	"bRoot": "bRoot",			# Root begins
@@ -86,7 +92,7 @@ def start_planting():
 			temp = temp_info["temperature"]
 			humi = humi_info["humidity"]
 			reward = temp_info["status"] + humi_info["status"]
-			msg_txt_formatted = MESSAGE.format(plant_id=plant_id, temperature=temp, humidity=humi, state=growth_state, reward=reward)
+			msg_txt_formatted = MESSAGE.format(deviceId= DEVICE_ID, plant_id=plant_id, temperature=temp, humidity=humi, state=growth_state, reward=reward)
 			message = Message(msg_txt_formatted)
 			
 			# Go to a new day
