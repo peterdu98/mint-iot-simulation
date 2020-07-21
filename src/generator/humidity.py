@@ -2,7 +2,12 @@ from ._condition import Condition
 import random
 
 class Humidity(Condition):
-	'''
+	''' This class is to create an Humdity object to generate humidity information.
+		The generated humidity data will be different from the initial value at most 
+		20 percentages.
+		
+		:param init_value: An initial humidity value
+		:param status_dict: An humidity status for generating rewarding score
 	'''
 	def __init__(self, init_value, status_dict):
 		super().__init__(init_value, status_dict)

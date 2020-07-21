@@ -1,7 +1,5 @@
 
 class Condition:
-	'''
-	'''
 	def __init__(self, init_value, status_dict):
 		self.init_value = init_value
 		self.status_dict = status_dict

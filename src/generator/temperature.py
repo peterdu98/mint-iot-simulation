@@ -2,7 +2,11 @@ from ._condition import Condition
 import random
 
 class Temperature(Condition):
-	'''
+	''' This class is to create an Temperature object to generate temperature information.
+		The generated temperature data will be different from the initial value at most 6 units.
+		
+		:param init_value: An initial temperature value
+		:param status_dict: An temperature status for generating rewarding score
 	'''
 	def __init__(self, init_value, status_dict):
 		super().__init__(init_value, status_dict)
